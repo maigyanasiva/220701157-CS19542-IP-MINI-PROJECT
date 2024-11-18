@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sakthiman Super Market - Products</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/product.css') }}">
+  <script src="{{ url_for('static', filename='js/product.js') }}" defer></script>
+</head>
+<body >
+  <!-- Navigation Menu -->
+  <header>
+    <nav>
+      <ul class="menu">
+        <li><a href="{{ url_for('homepage') }}">Home</a></li>
+        <li><a href="{{ url_for('products') }}">Products</a></li>
+        <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
+        <li><a href="{{ url_for('sales_billing') }}">Sales</a></li>
+        <li><a href="{{ url_for('crm') }}">Customer</a></li>
+        <li><a href="{{ url_for('financial_report') }}">Financial Report</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Parallax Section -->
+  <div class="parallax-section">
+    <h1>Our Products</h1>
+  </div>
+
+  <!-- Product Cards Section -->
+  <section class="product-section" id="productSection">
+    <!-- Product cards will be populated here -->
+  </section>
+</body>
+</html>

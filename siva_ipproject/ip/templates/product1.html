@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakthiman SuperMarket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles1.css') }}">
+</head>
+<body>
+    <div id="scrollProgress"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="#" class="close-btn" id="close-btn">&times;</a>
+        <a href="{{ url_for('inventory') }}">Inventory</a>
+        <a href="{{ url_for('sales_billing') }}">Sales</a>
+        <a href="{{ url_for('crm') }}">Customer Details</a>
+        <a href="{{ url_for('financial_report') }}">Financial Reports</a>
+    </div>
+
+    <!-- Hamburger Menu Icon -->
+    <span class="hamburger-icon" id="hamburger-icon">&#9776;</span>
+
+    <header>
+        <h1 class="logo">Sakthiman SuperMarket</h1>
+        <nav>
+            <ul>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to Sakthiman SuperMarket!</h2>
+        <p>Your one-stop shop for everything you need.</p>
+        <button class="cta-button ripple">Explore</button>
+    </section>
+
+    <section id="products" class="products">
+        <h2>Products</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/OIP.jpeg') }}" alt="Product 1">
+                    <h3>Parle G</h3>
+                    <p>Price: $10.00</p>
+                    <button class="product-button ripple">Check the stock</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/org.jpeg') }}" alt="Product 2">
+                    <h3>Orange Mittai</h3>
+                    <p>Price: $15.00</p>
+                    <button class="product-button ripple">Check the stock</button>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='images/gls.jpeg') }}" alt="Product 3">
+                    <h3>Goli Soda</h3>
+                    <p>Price: $20.00</p>
+                    <button class="product-button ripple">Check the stock</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Sakthiman SuperMarket. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script1.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: wheat;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+}
+
+.inventory-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #cc0000;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f8f9fa;
+}
+
+.stock-low {
+  color: red;
+  font-weight: bold;
+}
+
+.stock-ok {
+  color: green;
+}
+
+.stock-high {
+  color: blue;
+}
+
+#addProductForm {
+  margin-top: 20px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#addProductForm input, #addProductForm select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#purchaseOrderSection {
+  margin-top: 20px;
+}
+
+#purchaseOrderTable {
+  width: 100%;
+  margin-top: 10px;
+}
+
+#purchaseOrderTable th, #purchaseOrderTable td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+ /* Navigation Menu */
+ nav {
+  background-color: #ff5050;
+  padding: 10px;
+  text-align:left;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  justify-content: left;
+}
+
+
+.menu li {
+  margin: 0 20px;
+  position: relative;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px;
+  display: block;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  color: #ffff00;
+}
+
+.menu li::before {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease-out;
+}
+
+.menu li:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}

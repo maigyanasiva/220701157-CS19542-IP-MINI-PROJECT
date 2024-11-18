@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Reporting and Analytics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles4.css') }}">
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <header>
+      <nav>
+        <ul class="menu">
+          <li><a href="{{ url_for('homepage') }}">Home</a></li>
+          <li><a href="{{ url_for('products') }}">Products</a></li>
+          <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
+          <li><a href="{{ url_for('sales_billing') }}">Sales</a></li>
+          <li><a href="{{ url_for('crm') }}">Customer</a></li>
+          <li><a href="{{ url_for('financial_report') }}">Financial Report</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1>Financial Reporting and Analytics</h1>
+
+      <div class="report-controls">
+        <label for="reportPeriod">Select Report Period:</label>
+        <select id="reportPeriod" onchange="generateReport()">
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </select>
+      </div>
+
+      <div class="input-section">
+        <h2>Enter Sales and Cost Data</h2>
+        <form id="dataInputForm" onsubmit="submitData(event)">
+          <label for="salesData">Enter Sales Data (comma-separated):</label>
+          <input type="text" id="salesData" required placeholder="e.g., 100,200,300">
+
+          <label for="costData">Enter Cost Data (comma-separated):</label>
+          <input type="text" id="costData" required placeholder="e.g., 50,150,250">
+
+          <button type="submit">Submit Data</button>
+        </form>
+      </div>
+
+      <div class="report-summary">
+        <h2>Summary Report</h2>
+        <p>Total Sales: $<span id="totalSales">0.00</span></p>
+        <p>Profit: $<span id="totalProfit">0.00</span></p>
+        <p>Total Costs: $<span id="totalCosts">0.00</span></p>
+      </div>
+
+      <div class="sales-trends">
+        <h2>Sales Trends (Table View)</h2>
+        <table id="salesTrendsTable">
+          <thead>
+            <tr>
+              <th>Time Period</th>
+              <th>Sales</th>
+            </tr>
+          </thead>
+          <tbody id="salesTrendsBody">
+            <!-- Sales trends data will be dynamically added here -->
+          </tbody>
+          <tfoot id="salesTotalRow">
+            <!-- Total sales will be dynamically added here -->
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="cost-analysis">
+        <h2>Cost Analysis (Table View)</h2>
+        <table id="costAnalysisTable">
+          <thead>
+            <tr>
+              <th>Time Period</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody id="costAnalysisBody">
+            <!-- Cost analysis data will be dynamically added here -->
+          </tbody>
+          <tfoot id="costTotalRow">
+            <!-- Total costs will be dynamically added here -->
+          </tfoot>
+        </table>
+      </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script4.js') }}"></script>
+
+</body>
+</html>

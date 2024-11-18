@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supermarket Inventory Management</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles1.css') }}">
+</head>
+<body>
+  <!-- Navigation Menu -->
+  <header>
+    <nav>
+      <ul class="menu">
+        <li><a href="{{ url_for('homepage') }}">Home</a></li>
+        <li><a href="{{ url_for('products') }}">Products</a></li>
+        <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
+        <li><a href="{{ url_for('sales_billing') }}">Sales</a></li>
+        <li><a href="{{ url_for('crm') }}">Customer</a></li>
+        <li><a href="{{ url_for('financial_report') }}">Financial Report</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="container">
+    <h1>Inventory Management</h1>
+    
+    <div class="inventory-controls">
+      <button onclick="showAddProductForm()">Add Product</button>
+      <button onclick="generatePurchaseOrder()">Generate Purchase Order</button>
+    </div>
+
+    <!-- Add Product Form (Initially hidden) -->
+    <div id="addProductForm" style="display: none;">
+      <h2>Add New Product</h2>
+      <form id="productForm" onsubmit="addProduct(event)">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" required>
+
+        <label for="category">Category:</label>
+        <input type="text" id="category" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" required>
+
+        <label for="stock">Stock Level:</label>
+        <input type="number" id="stock" min="0" required>
+
+        <label for="reorderLevel">Reorder Level:</label>
+        <input type="number" id="reorderLevel" min="0" required>
+
+        <button type="submit">Add Product</button>
+        <button type="button" onclick="hideAddProductForm()">Cancel</button>
+      </form>
+    </div>
+    
+    <!-- Filters for Category and Location -->
+    <div class="filters">
+      <label for="categoryFilter">Category:</label>
+      <select id="categoryFilter" onchange="filterByCategory()">
+        <option value="all">All Categories</option>
+      </select>
+
+      <label for="locationFilter">Location:</label>
+      <select id="locationFilter" onchange="filterByLocation()">
+        <option value="all">All Locations</option>
+      </select>
+    </div>
+
+    <!-- Inventory Table -->
+    <table id="inventoryTable">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>Location</th>
+          <th>Stock Level</th>
+          <th>Reorder Level</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="inventoryBody">
+        <!-- Inventory items will be dynamically added here -->
+      </tbody>
+    </table>
+    
+    <!-- Purchase Order Section (Initially hidden) -->
+    <div id="purchaseOrderSection" style="display: none;">
+      <h2>Purchase Orders</h2>
+      <table id="purchaseOrderTable">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Reorder Quantity</th>
+          </tr>
+        </thead>
+        <tbody id="purchaseOrderBody">
+          <!-- Purchase orders will be dynamically added here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    // Show add product form
+function showAddProductForm() {
+  document.getElementById('addProductForm').style.display = 'block';
+}
+
+// Hide add product form
+function hideAddProductForm() {
+  document.getElementById('addProductForm').style.display = 'none';
+}
+
+// Add product function
+async function addProduct(event) {
+  event.preventDefault();
+  
+  const productName = document.getElementById('productName').value;
+  const category = document.getElementById('category').value;
+  const location = document.getElementById('location').value;
+  const stock = parseInt(document.getElementById('stock').value);
+  const reorderLevel = parseInt(document.getElementById('reorderLevel').value);
+
+  const product = { productName, category, location, stock, reorderLevel };
+
+  const response = await fetch('/api/inventory', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(product)
+  });
+
+  if (response.ok) {
+    alert("Product added successfully!");
+    hideAddProductForm();
+    loadInventory(); // Reload inventory to show new product
+  } else {
+    alert("Error adding product!");
+  }
+}
+
+// Load inventory items from the API
+async function loadInventory() {
+  const response = await fetch('/api/inventory');
+  const inventoryItems = await response.json();
+  const inventoryBody = document.getElementById('inventoryBody');
+  inventoryBody.innerHTML = ''; // Clear existing items
+
+  inventoryItems.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${item.productName}</td>
+      <td>${item.category}</td>
+      <td>${item.location}</td>
+      <td>${item.stock}</td>
+      <td>${item.reorderLevel}</td>
+      <td><button onclick="editProduct('${item._id}')">Edit</button> <button onclick="deleteProduct('${item._id}')">Delete</button></td>
+    `;
+    inventoryBody.appendChild(row);
+  });
+}
+
+// Call loadInventory when the page loads
+window.onload = loadInventory;
+    
+  </script>
+
+  <script src="{{ url_for('static', filename='js/script1.js') }}"></script>
+
+</body>
+</html>
